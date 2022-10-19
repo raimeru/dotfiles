@@ -60,7 +60,11 @@ return packer.startup {
 
     use {
       "nvim-treesitter/nvim-treesitter",
-      run = { ":TSUpdate" },
+      event = "BufRead",
+      run = ":TSUpdate",
+      config = function()
+        require("configs.treesitter").setup()
+      end,
     }
 
     use "lewis6991/gitsigns.nvim"
@@ -78,7 +82,7 @@ return packer.startup {
 
     use {
       "kyazdani42/nvim-tree.lua",
-      even = "CursorHold",
+      event = "CursorHold",
       requires = { "kyazdani42/nvim-web-devicons" },
       cmd = {
         "NvimTreeToggle",

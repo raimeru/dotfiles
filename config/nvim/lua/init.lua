@@ -7,6 +7,4 @@ return {
   require "configs.diagnostic",
   require "configs.gitsigns",
   require "configs.colorscheme",
-  require "configs.statusline",
-  require "configs.nvim-tree",
 }

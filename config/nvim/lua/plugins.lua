@@ -75,7 +75,13 @@ return packer.startup {
       end,
     }
 
-    use "folke/tokyonight.nvim"
+    use {
+      "folke/tokyonight.nvim",
+      event = "BufEnter",
+      config = function()
+        require("configs.colorscheme").setup()
+      end,
+    }
 
     use {
       "nvim-lualine/lualine.nvim",
@@ -89,6 +95,7 @@ return packer.startup {
     use {
       "akinsho/bufferline.nvim",
       tag = "v3.*",
+      after = "tokyonight.nvim",
       config = function()
         require("configs.bufferline").setup()
       end,

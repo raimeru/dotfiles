@@ -8,8 +8,10 @@ M.setup = function()
 
   tokyonight.setup {
     style = "night",
+    styles = {
+      keywords = { italic = false },
+    },
     lualine_bold = true,
-		hide_inactive_statusline = true,
   }
   vim.cmd [[ colorscheme tokyonight ]]
 end

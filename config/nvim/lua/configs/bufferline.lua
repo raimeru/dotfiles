@@ -15,8 +15,8 @@ M.setup = function()
           filetype = "NvimTree",
           text = "File Explorer",
           text_align = "center",
-          highlight = "Title",
-          separator = true,
+          highlight = "FileExplorerBar",
+          separator = " ",
         },
       },
       show_duplicate_prefix = false,
@@ -30,8 +30,7 @@ M.setup = function()
         fg = colors.red,
       },
       offset_separator = {
-        fg = colors.bg,
-        bg = colors.bg,
+        bg = colors.blue,
       },
     },
   }

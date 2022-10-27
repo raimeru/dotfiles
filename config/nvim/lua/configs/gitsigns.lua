@@ -17,8 +17,6 @@ M.setup = function()
       changedelete = { hl = "GitSignsChange", text = "╍", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
     },
     signcolumn = true,
-    linehl = false,
-    word_diff = true,
     current_line_blame = true,
     current_line_blame_formatter = "<author> on <author_time:%Y-%m-%d %H:%M %Z> - <summary>",
     preview_config = {

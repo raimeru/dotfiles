@@ -9,6 +9,8 @@ M.setup = function()
   nvim_tree.setup {
     disable_netrw = true,
     hijack_netrw = true,
+    respect_buf_cwd = true,
+    sync_root_with_cwd = true,
     sort_by = "case_sensitive",
     view = {
       width = 25,
@@ -58,6 +60,10 @@ M.setup = function()
           },
         },
       },
+    },
+    update_focused_file = {
+      enable = true,
+      update_root = true,
     },
   }
 end

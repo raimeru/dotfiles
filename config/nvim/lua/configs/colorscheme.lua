@@ -12,6 +12,12 @@ M.setup = function()
       keywords = { italic = false },
     },
     lualine_bold = true,
+    on_highlights = function(highlights, colors)
+      highlights.NvimTreeExecFile = {
+        fg = colors.green,
+        bold = false,
+      }
+    end,
   }
   vim.cmd [[ colorscheme tokyonight ]]
 end

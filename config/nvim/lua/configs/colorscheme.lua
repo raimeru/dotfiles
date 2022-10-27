@@ -17,11 +17,11 @@ M.setup = function()
         fg = colors.green,
         bold = false,
       }
-			highlights.FileExplorerBar = {
-				fg = colors.black,
-				bg = colors.blue,
-				bold = true,
-			}
+      highlights.FileExplorerBar = {
+        fg = colors.black,
+        bg = colors.blue,
+        bold = true,
+      }
     end,
   }
   vim.cmd [[ colorscheme tokyonight ]]

@@ -5,10 +5,15 @@ M.setup = function()
   if not nvim_tree_ok then
     return
   end
+  local tree = require("icons").tree
+  local git = require("icons").git
+  local folder = require("icons").folder
 
   nvim_tree.setup {
     disable_netrw = true,
     hijack_netrw = true,
+    respect_buf_cwd = true,
+    sync_root_with_cwd = true,
     sort_by = "case_sensitive",
     view = {
       width = 25,
@@ -26,7 +31,7 @@ M.setup = function()
       icons = {
         webdev_colors = true,
         git_placement = "signcolumn",
-        symlink_arrow = " ➦ ",
+        symlink_arrow = tree.symlink_arrow,
         show = {
           file = true,
           folder = true,
@@ -34,30 +39,34 @@ M.setup = function()
           git = true,
         },
         glyphs = {
-          default = "",
-          symlink = "",
-          bookmark = "",
+          default = tree.default,
+          symlink = tree.symlink,
+          bookmark = tree.bookmark,
           folder = {
-            arrow_closed = "",
-            arrow_open = "",
-            default = "",
-            open = "",
-            empty = "",
-            empty_open = "",
-            symlink = "",
-            symlink_open = "",
+            arrow_closed = folder.arrow_closed,
+            arrow_open = folder.arrow_open,
+            default = folder.default,
+            open = folder.open,
+            empty = folder.empty,
+            empty_open = folder.empty_open,
+            symlink = folder.symlink,
+            symlink_open = folder.symlink_open,
           },
           git = {
-            unstaged = "✗",
-            staged = "✔",
-            unmerged = "",
-            renamed = "➜",
-            untracked = "",
-            deleted = "⁃",
-            ignored = "",
+            unstaged = git.unstaged,
+            staged = git.staged,
+            unmerged = git.unmerged,
+            renamed = git.renamed,
+            untracked = git.untracked,
+            deleted = git.deleted,
+            ignored = git.ignored,
           },
         },
       },
+    },
+    update_focused_file = {
+      enable = true,
+      update_root = true,
     },
   }
 end

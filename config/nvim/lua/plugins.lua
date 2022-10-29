@@ -67,9 +67,21 @@ return packer.startup {
       end,
     }
 
-    use "lewis6991/gitsigns.nvim"
+    use {
+      "lewis6991/gitsigns.nvim",
+      event = "BufRead",
+      config = function()
+        require("configs.gitsigns").setup()
+      end,
+    }
 
-    use "folke/tokyonight.nvim"
+    use {
+      "folke/tokyonight.nvim",
+      event = "BufEnter",
+      config = function()
+        require("configs.colorscheme").setup()
+      end,
+    }
 
     use {
       "nvim-lualine/lualine.nvim",
@@ -83,6 +95,7 @@ return packer.startup {
     use {
       "akinsho/bufferline.nvim",
       tag = "v3.*",
+      after = "tokyonight.nvim",
       config = function()
         require("configs.bufferline").setup()
       end,
@@ -90,7 +103,6 @@ return packer.startup {
 
     use {
       "kyazdani42/nvim-tree.lua",
-      event = "CursorHold",
       requires = { "kyazdani42/nvim-web-devicons" },
       cmd = {
         "NvimTreeToggle",

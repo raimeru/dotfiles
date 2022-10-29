@@ -5,6 +5,4 @@ return {
   require "configs.cmp",
   require "configs.devicons",
   require "configs.diagnostic",
-  require "configs.gitsigns",
-  require "configs.colorscheme",
 }

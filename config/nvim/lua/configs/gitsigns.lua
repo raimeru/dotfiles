@@ -6,8 +6,6 @@ M.setup = function()
     return
   end
 
-  local bold_border = require("icons").bold_border
-
   gitsigns.setup {
     signs = {
       add = { hl = "GitSignsAdd", text = "┃", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
@@ -20,10 +18,9 @@ M.setup = function()
     current_line_blame = true,
     current_line_blame_formatter = "<author> on <author_time:%Y-%m-%d %H:%M %Z> - <summary>",
     preview_config = {
-      border = bold_border,
+      border = "rounded",
       style = "minimal",
       relative = "cursor",
-      row = 1,
     },
   }
 end

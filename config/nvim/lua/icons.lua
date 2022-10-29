@@ -44,14 +44,4 @@ return {
     section_left = "",
     section_right = "",
   },
-  bold_border = {
-    "┏",
-    "━",
-    "┓",
-    "┃",
-    "┛",
-    "━",
-    "┗",
-    "┃",
-  },
 }

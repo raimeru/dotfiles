@@ -45,6 +45,7 @@ cmp.setup {
     end, { "i", "s" }),
   },
   window = {
+    completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
   formatting = {

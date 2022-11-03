@@ -78,6 +78,7 @@ return packer.startup {
     use {
       "folke/tokyonight.nvim",
       event = "BufEnter",
+      module = { "tokyonight", "tokyonight.colors" },
       config = function()
         require("configs.colorscheme").setup()
       end,

@@ -78,6 +78,7 @@ return packer.startup {
     use {
       "folke/tokyonight.nvim",
       event = "BufEnter",
+      module = { "tokyonight", "tokyonight.colors" },
       config = function()
         require("configs.colorscheme").setup()
       end,
@@ -113,6 +114,28 @@ return packer.startup {
       config = function()
         require("configs.nvim-tree").setup()
       end,
+    }
+
+    use {
+      "nvim-telescope/telescope.nvim",
+      tag = "*",
+      requires = { "nvim-lua/plenary.nvim" },
+      keys = {
+        { "n", "<leader>ff" },
+        { "n", "<leader>fg" },
+        { "n", "<leader>fb" },
+        { "n", "<leader>fh" },
+        { "n", "<leader>fc" },
+      },
+      cmd = { "Telescope" },
+      config = function()
+        require("configs.telescope").setup()
+      end,
+    }
+
+    use {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      run = "make",
     }
 
     -- Automatically set up your configuration after cloning packer.nvim

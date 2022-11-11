@@ -21,6 +21,8 @@ end
 
 local g = vim.g
 
+g.mapleader = " "
+
 local disabled_built_ins = {
   "2html_plugin",
   "getscript",

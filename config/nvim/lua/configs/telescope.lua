@@ -6,13 +6,6 @@ M.setup = function()
     return
   end
   local actions = require "telescope.actions.layout"
-  local builtin = require "telescope.builtin"
-
-  vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-  vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-  vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-  vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
-  vim.keymap.set("n", "<leader>fc", builtin.colorscheme, {})
 
   telescope.setup {
     defaults = {
@@ -22,9 +15,9 @@ M.setup = function()
       sorting_strategy = "ascending",
       layout_strategy = "horizontal",
       layout_config = {
+        height = 0.80,
+        width = 0.85,
         horizontal = {
-          height = 0.85,
-          width = 0.90,
           preview_cutoff = 75,
           preview_width = 0.55,
           results_width = 0.70,
@@ -32,11 +25,12 @@ M.setup = function()
         vertical = {
           preview_cutoff = 35,
           preview_height = 0.35,
+          mirror = true,
         },
         prompt_position = "top",
       },
       path_display = { "smart" },
-      prompt_prefix = "  ",
+      prompt_prefix = "  ",
       selection_caret = " ",
       entry_prefix = " ",
       mappings = {

@@ -120,14 +120,7 @@ return packer.startup {
       "nvim-telescope/telescope.nvim",
       tag = "*",
       requires = { "nvim-lua/plenary.nvim" },
-      keys = {
-        { "n", "<leader>ff" },
-        { "n", "<leader>fg" },
-        { "n", "<leader>fb" },
-        { "n", "<leader>fh" },
-        { "n", "<leader>fc" },
-      },
-      cmd = { "Telescope" },
+      module = "telescope",
       config = function()
         require("configs.telescope").setup()
       end,
@@ -136,6 +129,13 @@ return packer.startup {
     use {
       "nvim-telescope/telescope-fzf-native.nvim",
       run = "make",
+    }
+
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require("configs.which-key").setup()
+      end,
     }
 
     -- Automatically set up your configuration after cloning packer.nvim

@@ -138,6 +138,14 @@ return packer.startup {
       end,
     }
 
+    use {
+      "glepnir/dashboard-nvim",
+      event = "VimEnter",
+      config = function()
+        require("configs.dashboard").setup()
+      end,
+    }
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then

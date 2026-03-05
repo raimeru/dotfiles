@@ -1,23 +1,26 @@
-local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_ok then
-  return
+local ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+if not ok then
+	return
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = cmp_lsp.default_capabilities()
 
-lspconfig.sumneko_lua.setup {
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      runtime = {
-        version = "Lua 5.1",
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-}
+vim.lsp.config("lua_ls", {
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+})
+
+vim.lsp.enable("lua_ls")
+

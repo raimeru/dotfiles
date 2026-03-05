@@ -1,57 +1,51 @@
 local M = {}
 
 M.setup = function()
-  local dashboard_ok, dashboard = pcall(require, "dashboard")
-  if not dashboard_ok then
-    return
-  end
-  local home = os.getenv "HOME"
+	local ok, alpha = pcall(require, "alpha")
+	if not ok then return end
+	local dashboard = require("alpha.themes.dashboard")
 
-  dashboard.custom_header = {
-    " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-    " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-    " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-    " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-    " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-    " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-  }
+	-- Header
+	dashboard.section.header.val = {
+		" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+		" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+		" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+		" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+		" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+		" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+	}
 
-  dashboard.session_directory = home .. "/.local/state/nvim/session"
-  dashboard.header_pad = 6
-  dashboard.center_pad = 5
-  dashboard.footer_pad = 1
-  dashboard.custom_center = {
-    {
-      icon = "  ",
-      desc = "Open Last Session             ",
-      action = "SessionLoad",
-      shortcut = "SPC s l",
-    },
-    {
-      icon = "  ",
-      desc = "Recent files                  ",
-      action = "lua require('telescope.builtin').oldfiles()",
-      shortcut = "SPC f r",
-    },
-    {
-      icon = "  ",
-      desc = "Find  File                    ",
-      action = "lua require('telescope.builtin').find_files { find_command = { 'rg', '--hidden', '--files', '-g', '!.git' }}",
-      shortcut = "SPC f f",
-    },
-    {
-      icon = "  ",
-      desc = "File Browser                  ",
-      action = "NvimTreeToggle",
-      shortcut = "SPC e t",
-    },
-    {
-      icon = "  ",
-      desc = "Find  word                    ",
-      action = "lua require('telescope.builtin').live_grep()",
-      shortcut = "SPC f g",
-    },
-  }
+	-- Buttons
+	dashboard.section.buttons.val = {
+		dashboard.button("l", "  Open Last Session", "SessionLoad"),
+		dashboard.button("r", "  Recent files", "lua require('telescope.builtin').oldfiles()"),
+		dashboard.button("f", "  Find File",
+			[[lua require('telescope.builtin').find_files { find_command = { 'rg', '--hidden', '--files', '-g', '!.git' } }]]),
+		dashboard.button("e", "  File Browser", "NvimTreeToggle"),
+		dashboard.button("g", "  Find Word", "lua require('telescope.builtin').live_grep()"),
+	}
+
+	-- Footer showing number of loaded plugins
+	local lazy_ok, lazy = pcall(require, "lazy")
+	if lazy_ok then
+		local count = #lazy.plugins()
+		dashboard.section.footer.val = "⚡ " .. count .. " plugins loaded"
+		dashboard.section.footer.opts.hl = "Comment"
+		dashboard.section.footer.opts.position = "center"
+	end
+
+	-- Layout
+	dashboard.opts.layout = {
+		{ type = "padding", val = 6 },
+		dashboard.section.header,
+		{ type = "padding", val = 2 },
+		dashboard.section.buttons,
+		{ type = "padding", val = 1 },
+		dashboard.section.footer,
+	}
+
+	alpha.setup(dashboard.opts)
 end
 
 return M
+

@@ -2,3 +2,4 @@ plugin
 testdir/
 profile.log
 startup.log
+config/nvim/lazy-lock.json

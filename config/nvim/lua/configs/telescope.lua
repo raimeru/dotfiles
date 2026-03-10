@@ -12,6 +12,9 @@ M.setup = function()
       -- Default configuration for telescope goes here:
       -- config_key = value,
       -- other layout configuration here
+      file_ignore_patterns = {
+      "^dotbot/",
+    },
       sorting_strategy = "ascending",
       layout_strategy = "horizontal",
       layout_config = {

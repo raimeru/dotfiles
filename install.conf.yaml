@@ -9,5 +9,9 @@
     ~/.config/nvim:
       path: config/nvim
 
+- link:
+    ~/.config/wezterm:
+      path: config/wezterm
+
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

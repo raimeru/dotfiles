@@ -6,10 +6,11 @@
 - clean: ['~']
 
 - link:
+    ~/.config/mpd:
+      if: '[ `uname -o` = GNU/Linux ]'
+      path: config/mpd
     ~/.config/nvim:
       path: config/nvim
-
-- link:
     ~/.config/wezterm:
       path: config/wezterm
 

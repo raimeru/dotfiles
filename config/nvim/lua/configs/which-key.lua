@@ -2,74 +2,46 @@ local wk = require("which-key")
 
 local M = {}
 
+local Diagnostics = function()
+  vim.diagnostic.config({
+    virtual_lines = true,
+    virtual_text = true
+  })
+end
+local Format = function() vim.lsp.buf.format() end
+
 function M.setup()
-	wk.setup({})
-
-	-- General actions
-	wk.register({
-		w = { "<cmd>w<cr>", "Save" },
-		q = { "<cmd>q<cr>", "Quit" },
-		qf = { "<cmd>q!<cr>", "Force Quit" },
-		qa = { "<cmd>qall!<cr>", "Quit All" },
-	})
-
-	-- Leader key mappings
-	wk.register({
-		-- Files & Search
-		f = {
-			name = "Find",
-			f = { "<cmd>Telescope find_files<cr>", "Find Files" },
-			g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
-			r = { "<cmd>Telescope oldfiles<cr>", "Recent Files" },
-			h = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
-			c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-			m = { function() vim.lsp.buf.format() end, "Format File" },
-		},
-
-		-- Session management
-		s = {
-			name = "Session",
-			s = { "<cmd>Autosession save<cr>", "Save Session" },
-			l = { "<cmd>Autosession restore<cr>", "Load Session" },
-		},
-
-		-- Plugins
-		p = {
-			name = "Plugins",
-			p = { "<cmd>Lazy profile<cr>", "Profile" },
-			s = { "<cmd>Lazy sync<cr>", "Sync" },
-			u = { "<cmd>Lazy update<cr>", "Update" },
-			l = { "<cmd>Lazy<cr>", "Lazy UI" },
-		},
-
-		-- Buffers / Tabs
-		b = {
-			name = "Buffers",
-			b = { "<cmd>BufferLinePick<cr>", "Pick Buffer" },
-			c = { "<cmd>BufferLineClose<cr>", "Close Buffer" },
-			n = { "<cmd>BufferLineCycleNext<cr>", "Next Buffer" },
-			p = { "<cmd>BufferLineCyclePrev<cr>", "Prev Buffer" },
-		},
-
-		-- LSP
-		l = {
-			name = "LSP",
-			r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename Symbol" },
-			a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-			d = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" },
-			f = { function() vim.lsp.buf.format() end, "Format File" },
-		},
-
-		-- Git
-		g = {
-			name = "Git",
-			s = { "<cmd>Gitsigns stage_buffer<cr>", "Stage Buffer" },
-			u = { "<cmd>Gitsigns undo_stage_hunk<cr>", "Undo Stage Hunk" },
-			p = { "<cmd>Gitsigns preview_hunk<cr>", "Preview Hunk" },
-			b = { "<cmd>Gitsigns blame_line<cr>", "Blame Line" },
-		},
-
-	}, { prefix = "<leader>" })
+  wk.add({
+    { "<leader>f",  group = "Find" },
+    { "<leader>fc", "<cmd>Telescope colorscheme<cr>",         desc = "Colorscheme" },
+    { "<leader>ff", "<cmd>Telescope find_files<cr>",          desc = "Find Files" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>",           desc = "Live Grep" },
+    { "<leader>fh", "<cmd>Telescope help_tags<cr>",           desc = "Help Tags" },
+    { "<leader>fr", "<cmd>Telescope oldfiles<cr>",            desc = "Recent Files" },
+    { "<leader>s",  group = "Session" },
+    { "<leader>sr", "<cmd>Autosession restore<cr>",           desc = "Load Session" },
+    { "<leader>ss", "<cmd>Autosession save<cr>",              desc = "Save Session" },
+    { "<leader>p",  group = "Plugins" },
+    { "<leader>pl", "<cmd>Lazy<cr>",                          desc = "Lazy UI" },
+    { "<leader>pp", "<cmd>Lazy profile<cr>",                  desc = "Profile" },
+    { "<leader>ps", "<cmd>Lazy sync<cr>",                     desc = "Sync" },
+    { "<leader>pu", "<cmd>Lazy update<cr>",                   desc = "Update" },
+    { "<leader>b",  group = "Buffers" },
+    { "<leader>bb", "<cmd>BufferLinePick<cr>",                desc = "Pick Buffer" },
+    { "<leader>bc", "<cmd>BufferLineClose<cr>",               desc = "Close Buffer" },
+    { "<leader>bn", "<cmd>BufferLineCycleNext<cr>",           desc = "Next Buffer" },
+    { "<leader>bp", "<cmd>BufferLineCyclePrev<cr>",           desc = "Prev Buffer" },
+    { "<leader>l",  group = "LSP" },
+    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+    { "<leader>ld", Diagnostics,                              desc = "Diagnostics" },
+    { "<leader>lf", Format,                                   desc = "Format File" },
+    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",      desc = "Rename Symbol" },
+    { "<leader>g",  group = "Git" },
+    { "<leader>gb", "<cmd>Gitsigns blame_line<cr>",           desc = "Blame Line" },
+    { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>",         desc = "Preview Hunk" },
+    { "<leader>gs", "<cmd>Gitsigns stage_buffer<cr>",         desc = "Stage Buffer" },
+    { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>",      desc = "Undo Stage Hunk" },
+  })
 end
 
 return M
